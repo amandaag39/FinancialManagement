@@ -1,17 +1,23 @@
 package org.example;
 
+import org.example.dao.GenericDAO;
 import org.example.dao.GenericDAOImpl;
 import org.example.model.User;
 import org.example.parsers.DOMParser;
 import org.example.parsers.XMLParser;
 import org.example.services.UserService;
+import org.example.utilities.ConnectionPool;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
+
+        
 //        // Homework 14 -
 //        //Initial test of the DB connection after adding Maven dependency
 //        try {
@@ -124,6 +130,109 @@ public class Main {
 //        }
 
 
+
+
+
+
+        // Homework 14 - revision: add ConnectionPool
+
+//        // Create a connection pool with desired configurations
+//        ConnectionPool connectionPool = new ConnectionPool();
+//
+//        // Create an instance of your DAO using the connection pool
+//        GenericDAO<User> userDao = new GenericDAOImpl<>(connectionPool, User.class);
+
+
+//        // 1. Test the getById method
+//        int entityId = 3; // Replace with the ID of the entity you want to retrieve
+//        User retrievedEntity = dao.getById(entityId);
+//        if (retrievedEntity != null) {
+//            System.out.println("Retrieved entity: " + retrievedEntity);
+//        } else {
+//            System.out.println("Entity with ID " + entityId + " not found.");
+//        }
+
+
+//        // 2. Test the create method
+//        // Create a new instance of the User entity
+//        User user = new User(5, "kirstein.jean", "jean.kirstein@example.com", "mpcozyinterior", "Jean", "Kirstein", LocalDate.of(1990, 9, 15), LocalDateTime.now(), LocalDateTime.now());
+//
+//        // Call the create method
+//        userDao.create(user);
+//
+//        // Verify if the User entity was inserted successfully
+//        User retrievedUser = userDao.getById(5);
+//        if (retrievedUser != null) {
+//            System.out.println("User created successfully: " + retrievedUser);
+//        } else {
+//            System.out.println("Failed to create User.");
+//        }
+
+
+        // 3. Test update method
+//        // Create a connection pool with desired configurations
+//        ConnectionPool connectionPool = new ConnectionPool();
+//
+//        // Create an instance of your DAO using the connection pool
+//        GenericDAO<User> userDao = new GenericDAOImpl<>(connectionPool, User.class);
+//
+//        try {
+//            // Create a User object with the original data
+//            User user = new User(14, "armin.arlert", "armin@example.com", "kireinaumi", "Armin", "Arlert",
+//                    LocalDate.of(2007, 4, 12), LocalDateTime.now(), LocalDateTime.now());
+//
+//            // Call the create method
+//            userDao.create(user);
+//
+//            // Set the updated values for the user
+//            user.setEmail("arminarmout@example.com");
+//            user.setPassword("newpassy");
+//
+//            // Call the update method
+//            userDao.update(user);
+//
+//            // Retrieve the user from the database and print its properties
+//            User updatedUser = userDao.getById(user.getUserId());
+//            if (updatedUser != null) {
+//                System.out.println("User updated successfully: " + updatedUser);
+//            } else {
+//                System.out.println("Failed to update User.");
+//            }
+//        } catch (Exception e) {
+//            System.err.println("An error occurred while performing operations:");
+//            e.printStackTrace();
+//        } finally {
+//            // Release the resources held by the connection pool
+//            connectionPool.close();
+//        }"
+
+//        // 4. Test delete method
+//        // Create a connection pool with desired configurations
+//        ConnectionPool connectionPool = new ConnectionPool();
+//
+//        // Create an instance of your DAO using the connection pool
+//        GenericDAO<User> userDao = new GenericDAOImpl<>(connectionPool, User.class);
+//
+//        try {
+//            // Create a User object with the ID of the user to be deleted
+//            User userToDelete = new User();
+//            userToDelete.setUserId(13); // Set the ID of the user to be deleted
+//
+//            // Delete the user from the database
+//            userDao.delete(userToDelete);
+//            System.out.println("User deleted from the database.");
+//        } catch (Exception e) {
+//            System.err.println("An error occurred while deleting the user:");
+//            e.printStackTrace();
+//        } finally {
+//            // Release the resources held by the connection pool
+//            connectionPool.close();
+//        }
+
+
+
+
+
         // Homework 15 - Test the DOM parser
         // Users
         String UsersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml";
@@ -149,5 +258,7 @@ public class Main {
         String StocksXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml";
         String StocksXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\StockSchema.xsd";
         XMLParser.parseXMLWithXSD(StocksXML, StocksXSD);
+
+
     }
 }

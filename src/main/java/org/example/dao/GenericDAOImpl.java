@@ -11,14 +11,15 @@ import java.util.List;
 
 import org.example.annotations.Column;
 import org.example.annotations.Id;
+import org.example.utilities.ConnectionPool;
 
 public class GenericDAOImpl<T> implements GenericDAO<T> {
-    private Connection connection;
+    private ConnectionPool connectionPool;
     private Class<T> entityClass;
     private String tableName;
 
-    public GenericDAOImpl(Connection connection, Class<T> entityClass) {
-        this.connection = connection;
+    public GenericDAOImpl(ConnectionPool connectionPool, Class<T> entityClass) {
+        this.connectionPool = connectionPool;
         this.entityClass = entityClass;
         this.tableName = entityClass.getSimpleName().toLowerCase();
         }
@@ -59,7 +60,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
         String query = queryBuilder.toString();
 
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
             int parameterIndex = 1;
             for (Field field : fields) {
                 field.setAccessible(true);
@@ -79,7 +81,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         String tableName = getTableName();
         String primaryKeyColumnName = getPrimaryKeyColumnName();
 
-        try (PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE " + primaryKeyColumnName + " = ?")) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement("SELECT * FROM " + tableName + " WHERE " + primaryKeyColumnName + " = ?")) {
             statement.setInt(1, id);
             try (ResultSet resultSet = statement.executeQuery()) {
                 if (resultSet.next()) {
@@ -92,6 +95,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         }
         return null; // Return null if the entity with the given id is not found
     }
+
+
 
 //    protected abstract String getTableName();
 
@@ -214,7 +219,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
 
         String query = queryBuilder.toString();
 
-        try (PreparedStatement statement = connection.prepareStatement(query)) {
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
             int parameterIndex = 1;
 
             for (Field field : columnFields) {
@@ -246,6 +252,7 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         String query = "DELETE FROM " + tableName + " WHERE " + primaryKeyColumn + " = ?";
 
         try {
+            Connection connection = connectionPool.getConnection();
             PreparedStatement statement = connection.prepareStatement(query);
             Object primaryKeyValue = getPrimaryKeyValue(entity, entityClass);
             statement.setObject(1, primaryKeyValue);
@@ -284,7 +291,8 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         List<T> entities = new ArrayList<>();
         String query = "SELECT * FROM " + tableName;
 
-        try (PreparedStatement statement = connection.prepareStatement(query);
+        try (Connection connection = connectionPool.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query);
              ResultSet resultSet = statement.executeQuery()) {
             while (resultSet.next()) {
                 T entity = createEntityFromResultSet(resultSet);
