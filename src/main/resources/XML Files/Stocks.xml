@@ -1,0 +1,20 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<stocks xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+    <stock>
+        <stock_symbol>AAPL</stock_symbol>
+        <company_name>Apple Inc.</company_name>
+        <stock_description>Apple Inc. designs, manufactures, and markets smartphones, personal computers, tablets, wearables, and accessories worldwide.</stock_description>
+        <exchange>NASDAQ-GS</exchange>
+        <sector>Technology</sector>
+        <market_cap>2.8</market_cap>
+        <dividend_yield>0.53</dividend_yield>
+        <p_e_ratio>30.58</p_e_ratio>
+        <earnings_per_share>5.89</earnings_per_share>
+        <beta>1.29</beta>
+        <high_price>181.21</high_price>
+        <low_price>181.21</low_price>
+        <last_trade_price>178.38</last_trade_price>
+        <volume>69</volume>
+    </stock>
+    <!-- Add more stock elements for additional stocks -->
+</stocks>

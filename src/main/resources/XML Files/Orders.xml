@@ -1,0 +1,12 @@
+<orders>
+    <order>
+        <order_id>1</order_id>
+        <account_id>1</account_id>
+        <stock_symbol>AAPL</stock_symbol>
+        <order_type>Market</order_type>
+        <quantity>10000</quantity>
+        <price>180.95</price>
+        <order_date>2023-06-02T14:32:02</order_date>
+    </order>
+    <!-- Add more order elements for additional orders -->
+</orders>

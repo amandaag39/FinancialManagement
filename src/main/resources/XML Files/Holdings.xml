@@ -1,0 +1,11 @@
+<holdings>
+    <holding>
+        <holding_id>1</holding_id>
+        <portfolio_id>1</portfolio_id>
+        <stock_symbol>AAPL</stock_symbol>
+        <quantity>10000</quantity>
+        <purchase_price>180.95</purchase_price>
+        <purchase_date>2023-06-02</purchase_date>
+    </holding>
+    <!-- Add more holdings elements for additional holdings-->
+</holdings>

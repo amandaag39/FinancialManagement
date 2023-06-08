@@ -2,6 +2,8 @@ package org.example;
 
 import org.example.dao.GenericDAOImpl;
 import org.example.model.User;
+import org.example.parsers.DOMParser;
+import org.example.parsers.XMLParser;
 import org.example.services.UserService;
 
 import java.sql.Connection;
@@ -10,7 +12,8 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) throws SQLException {
-//        // Initial test of the DB connection after adding Maven dependency
+//        // Homework 14 -
+//        //Initial test of the DB connection after adding Maven dependency
 //        try {
 //            Connection connection = DatabaseConnection.getConnection();
 //            Statement statement = connection.createStatement();
@@ -103,22 +106,48 @@ public class Main {
 //            e.printStackTrace();
 //        }
 
-        // 5. Test the getAll method
-        // Instantiate the GenericDAOImpl and other dependencies
-        Connection connection = DatabaseConnection.getConnection();
-        GenericDAOImpl<User> userDAO = new GenericDAOImpl<>(connection, User.class);
+//        // 5. Test the getAll method
+//        // Instantiate the GenericDAOImpl and other dependencies
+//        Connection connection = DatabaseConnection.getConnection();
+//        GenericDAOImpl<User> userDAO = new GenericDAOImpl<>(connection, User.class);
+//
+//        // Call the getAll() method
+//        UserService userService = new UserService(userDAO);
+//
+//        //Call the getAllUsers() method
+//        List<User> userList = userService.getAllUsers();
+//
+//        // Verify the results
+//        System.out.println("All Users:");
+//        for (User user : userList) {
+//            System.out.println(user);
+//        }
 
-        // Call the getAll() method
-        UserService userService = new UserService(userDAO);
 
-        //Call the getAllUsers() method
-        List<User> userList = userService.getAllUsers();
+        // Homework 15 - Test the DOM parser
+        // Users
+        String UsersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml";
+        String UsersXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\UserSchema.xsd";
+        XMLParser.parseXMLWithXSD(UsersXML, UsersXSD);
 
-        // Verify the results
-        System.out.println("All Users:");
-        for (User user : userList) {
-            System.out.println(user);
-        }
+        // Accounts
+        String AccountsXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Accounts.xml";
+        String AccountsXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\AccountSchema.xsd";
+        XMLParser.parseXMLWithXSD(AccountsXML, AccountsXSD);
 
+        // Orders
+        String OrdersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Orders.xml";
+        String OrdersXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\OrderSchema.xsd";
+        XMLParser.parseXMLWithXSD(OrdersXML, OrdersXSD);
+
+        // Holdings
+        String HoldingsXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Holdings.xml";
+        String HoldingsXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\HoldingSchema.xsd";
+        XMLParser.parseXMLWithXSD(HoldingsXML, HoldingsXSD);
+
+        // Stocks
+        String StocksXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml";
+        String StocksXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\StockSchema.xsd";
+        XMLParser.parseXMLWithXSD(StocksXML, StocksXSD);
     }
 }
