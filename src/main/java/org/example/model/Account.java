@@ -1,20 +1,35 @@
 package org.example.model;
 
+import org.example.utilities.LocalDateTimeAdapter;
 import org.example.annotations.Column;
 import org.example.annotations.Id;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
+@XmlRootElement(name = "account")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Account {
+    @XmlElement(name = "account_id")
     @Id(name = "account_id")
     @Column(name = "account_id")
     private int accountId;
+    @XmlElement(name = "user_id")
     @Column(name = "user_id")
     private int userId;
+    @XmlElement(name = "account_type")
     @Column(name = "account_type")
     private String accountType;
+    @XmlElement
     private BigDecimal balance;
+
+    @XmlElement(name = "date_created")
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
 

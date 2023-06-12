@@ -3,33 +3,53 @@ package org.example.model;
 import org.example.annotations.Column;
 import org.example.annotations.Id;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 import java.math.BigDecimal;
 
+@XmlRootElement(name = "stock")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Stock {
+    @XmlElement(name = "stock_symbol")
     @Id(name = "stock_symbol")
     @Column(name = "stock_symbol")
     private String stockSymbol;
+    @XmlElement(name = "company_name")
     @Column(name = "company_name")
     private String companyName;
+    @XmlElement(name = "stock_description")
     @Column(name = "stock_description")
     private String stockDescription;
+    @XmlElement
     private String exchange;
+    @XmlElement
     private String sector;
+    @XmlElement(name = "market_cap")
     @Column(name = "market_cap")
     private BigDecimal marketCap;
+    @XmlElement(name = "dividend_yield")
     @Column(name = "dividend_yield")
     private BigDecimal dividendYield;
+    @XmlElement(name = "p_e_ratio")
     @Column(name = "p_e_ratio")
     private BigDecimal peRatio;
+    @XmlElement(name = "earnings_per_share")
     @Column(name = "earnings_per_share")
     private BigDecimal earningsPerShare;
+    @XmlElement
     private BigDecimal beta;
+    @XmlElement(name = "high_price")
     @Column(name = "high_price")
     private BigDecimal highPrice;
+    @XmlElement(name = "low_price")
     @Column(name = "low_price")
     private BigDecimal lowPrice;
+    @XmlElement(name = "last_trade_price")
     @Column(name = "last_trade_price")
     private BigDecimal lastTradePrice;
+    @XmlElement
     private int volume;
 
     public Stock() {

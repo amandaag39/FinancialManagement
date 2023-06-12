@@ -1,33 +1,44 @@
 package org.example.model;
 
-import org.example.annotations.Column;
-import org.example.annotations.Id;
 
+import org.example.utilities.LocalDateAdapter;
+import org.example.utilities.LocalDateTimeAdapter;
+
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.io.Serializable;
 
 
-public class User {
-    @Id(name = "user_id")
-    @Column(name = "user_id")
+@XmlRootElement(name = "user")
+@XmlAccessorType(XmlAccessType.FIELD)
+public class User implements Serializable {
+    @XmlElement(name = "user_id")
     private int userId;
+    @XmlElement
     private String username;
+    @XmlElement
     private String email;
+    @XmlElement
     private String password;
-    @Column(name = "first_name")
+    @XmlElement(name= "first_name")
     private String firstName;
-    @Column(name = "last_name")
+    @XmlElement(name="last_name")
     private String lastName;
-    @Column(name = "date_of_birth")
+    @XmlElement(name="date_of_birth")
+    @XmlJavaTypeAdapter(LocalDateAdapter.class)
     private LocalDate dateOfBirth;
-    @Column(name = "registration_date")
+    @XmlElement(name="registration_date")
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime registrationDate;
-    @Column(name = "last_login")
+    @XmlElement(name="last_login")
+    @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     private LocalDateTime lastLogin;
 
     //Constructor
     public User() {
-
+        //Default constructor
     }
     public User(int userId, String username, String email, String password, String firstName,
                 String lastName, LocalDate dateOfBirth, LocalDateTime registrationDate,
@@ -115,6 +126,8 @@ public class User {
     public void setLastLogin(LocalDateTime lastLogin) {
         this.lastLogin = lastLogin;
     }
+
+
 
     @Override
     public String toString() {

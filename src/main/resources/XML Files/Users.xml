@@ -1,5 +1,4 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<users xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'>
+<users>
     <user>
         <user_id>1</user_id>
         <username>john.doe</username>

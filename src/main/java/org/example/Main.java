@@ -2,12 +2,18 @@ package org.example;
 
 import org.example.dao.GenericDAO;
 import org.example.dao.GenericDAOImpl;
-import org.example.model.User;
+import org.example.model.*;
 import org.example.parsers.DOMParser;
 import org.example.parsers.XMLParser;
 import org.example.services.UserService;
 import org.example.utilities.ConnectionPool;
 
+import java.io.File;
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Unmarshaller;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -17,7 +23,7 @@ import java.util.List;
 public class Main {
     public static void main(String[] args) throws SQLException {
 
-        
+
 //        // Homework 14 -
 //        //Initial test of the DB connection after adding Maven dependency
 //        try {
@@ -233,32 +239,93 @@ public class Main {
 
 
 
-        // Homework 15 - Test the DOM parser
-        // Users
-        String UsersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml";
-        String UsersXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\UserSchema.xsd";
-        XMLParser.parseXMLWithXSD(UsersXML, UsersXSD);
+//        // Homework 15 - Test the DOM parser
+//        // Users
+//        String UsersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml";
+//        String UsersXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\UserSchema.xsd";
+//        XMLParser.parseXMLWithXSD(UsersXML, UsersXSD);
+//
+//        // Accounts
+//        String AccountsXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Accounts.xml";
+//        String AccountsXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\AccountSchema.xsd";
+//        XMLParser.parseXMLWithXSD(AccountsXML, AccountsXSD);
+//
+//        // Orders
+//        String OrdersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Orders.xml";
+//        String OrdersXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\OrderSchema.xsd";
+//        XMLParser.parseXMLWithXSD(OrdersXML, OrdersXSD);
+//
+//        // Holdings
+//        String HoldingsXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Holdings.xml";
+//        String HoldingsXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\HoldingSchema.xsd";
+//        XMLParser.parseXMLWithXSD(HoldingsXML, HoldingsXSD);
+//
+//        // Stocks
+//        String StocksXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml";
+//        String StocksXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\StockSchema.xsd";
+//        XMLParser.parseXMLWithXSD(StocksXML, StocksXSD);
 
-        // Accounts
-        String AccountsXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Accounts.xml";
-        String AccountsXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\AccountSchema.xsd";
-        XMLParser.parseXMLWithXSD(AccountsXML, AccountsXSD);
-
-        // Orders
-        String OrdersXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Orders.xml";
-        String OrdersXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\OrderSchema.xsd";
-        XMLParser.parseXMLWithXSD(OrdersXML, OrdersXSD);
-
-        // Holdings
-        String HoldingsXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Holdings.xml";
-        String HoldingsXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\HoldingSchema.xsd";
-        XMLParser.parseXMLWithXSD(HoldingsXML, HoldingsXSD);
-
-        // Stocks
-        String StocksXML = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml";
-        String StocksXSD = "C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XSD Files\\StockSchema.xsd";
-        XMLParser.parseXMLWithXSD(StocksXML, StocksXSD);
 
 
+        // Homework 16 - JAXB
+
+        // Parse users.xml
+        try {
+            // 1. Create an instance of the JAXBContext for root class
+            JAXBContext jaxbContext = JAXBContext.newInstance(Users.class); // Pass the class you want to unmarshal
+
+            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
+            Unmarshaller usersUnmarshaller = jaxbContext.createUnmarshaller();
+
+            // 3. Use the 'Unmarshaller' to unmarshal the XML data
+            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml");
+            Users unmarshalledUsers = (Users) usersUnmarshaller.unmarshal(xmlFile);
+
+            // 4. Access the parsed data
+            List<User> userList = unmarshalledUsers.getUserList();
+            System.out.println(userList);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        // parse accounts.xml
+
+        try {
+            // 1. Create an instance of the JAXBContext for root class
+            JAXBContext jaxbContext = JAXBContext.newInstance(Accounts.class); // Pass the class you want to unmarshal
+
+            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
+            Unmarshaller accountsUnmarshaller = jaxbContext.createUnmarshaller();
+
+            // 3. Use the 'Unmarshaller' to unmarshal the XML data
+            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Accounts.xml");
+            Accounts unmarshalledAccounts = (Accounts) accountsUnmarshaller.unmarshal(xmlFile);
+
+            // 4. Access the parsed data
+            List<Account> accountList = unmarshalledAccounts.getAccountList();
+            System.out.println(accountList);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
+
+        //parse stocks.xml
+
+        try {
+            // 1. Create an instance of the JAXBContext for root class
+            JAXBContext jaxbContext = JAXBContext.newInstance(Stocks.class); // Pass the class you want to unmarshal
+
+            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
+            Unmarshaller stocksUnmarshaller = jaxbContext.createUnmarshaller();
+
+            // 3. Use the 'Unmarshaller' to unmarshal the XML data
+            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml");
+            Stocks unmarshalledStocks = (Stocks) stocksUnmarshaller.unmarshal(xmlFile);
+
+            // 4. Access the parsed data
+            List<Stock> stockList = unmarshalledStocks.getStockList();
+            System.out.println(stockList);
+        } catch (JAXBException e) {
+            e.printStackTrace();
+        }
     }
 }
