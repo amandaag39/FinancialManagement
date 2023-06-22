@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.UserMapper">
+
+    <select id="selectUserById" resultMap="userResultMap">
+        SELECT * FROM User WHERE user_id = #{id}
+    </select>
+
+    <insert id="insertUser" parameterType="org.example.model.User">
+        INSERT INTO User (user_id, username, email, password, first_name, last_name, date_of_birth, registration_date, last_login)
+        VALUES (#{userId}, #{username}, #{email}, #{password}, #{firstName}, #{lastName}, #{dateOfBirth}, #{registrationDate}, #{lastLogin})
+    </insert>
+
+    <select id="selectLastInsertedId" resultType="java.lang.Integer">
+        SELECT LAST_INSERT_ID()
+    </select>
+
+    <update id="updateUser" parameterType="org.example.model.User">
+        UPDATE User
+        SET username = #{username}, email = #{email}, password = #{password}, first_name = #{firstName}, last_name = #{lastName}, date_of_Birth = #{dateOfBirth}, registration_date = #{registrationDate}, last_login = #{lastLogin}
+        WHERE user_id = #{userId}
+    </update>
+
+    <delete id="deleteUserById">
+        DELETE FROM User WHERE user_id = #{id}
+    </delete>
+
+    <select id="getAllUsers" resultMap="userResultMap">
+        SELECT * FROM User
+    </select>
+
+    <resultMap id="userResultMap" type="org.example.model.User" autoMapping="false">
+        <id property="userId" column="user_id" />
+        <result property="username" column="username" />
+        <result property="email" column="email" />
+        <result property="password" column="password" />
+        <result property="firstName" column="first_name" />
+        <result property="lastName" column="last_name" />
+        <result property="dateOfBirth" column="date_of_birth" />
+        <result property="registrationDate" column="registration_date" />
+        <result property="lastLogin" column="last_login" />
+    </resultMap>
+
+</mapper>

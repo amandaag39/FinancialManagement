@@ -37,9 +37,23 @@ public class User implements Serializable {
     private LocalDateTime lastLogin;
 
     //Constructor
+    //Constructors
     public User() {
         //Default constructor
     }
+    public User(String username, String email, String password, String firstName,
+                String lastName, LocalDate dateOfBirth, LocalDateTime registrationDate,
+                LocalDateTime lastLogin) {
+        this.username = username;
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.dateOfBirth = dateOfBirth;
+        this.registrationDate = registrationDate;
+        this.lastLogin = lastLogin;
+    }
+
     public User(int userId, String username, String email, String password, String firstName,
                 String lastName, LocalDate dateOfBirth, LocalDateTime registrationDate,
                 LocalDateTime lastLogin) {

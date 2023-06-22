@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.example.mapper.PaymentMapper">
+
+    <insert id="insertPayment" parameterType="org.example.model.Payment">
+        INSERT INTO Payment (account_id, amount, currency_id, payment_date)
+        VALUES (#{accountId}, #{amount}, #{currencyId}, #{paymentDate})
+    </insert>
+
+    <update id="updatePayment" parameterType="org.example.model.Payment">
+        UPDATE Payment
+        SET account_id = #{accountId}, amount = #{amount}, currency_id = #{currencyId}, payment_date = #{paymentDate}
+        WHERE payment_id = #{paymentId}
+    </update>
+
+    <delete id="deletePayment" parameterType="int">
+        DELETE FROM Payment
+        WHERE payment_id = #{paymentId}
+    </delete>
+
+    <select id="getPaymentById" parameterType="int" resultType="org.example.model.Payment">
+        SELECT payment_id, account_id, amount, currency_id, payment_date
+        FROM Payment
+        WHERE payment_id = #{paymentId}
+    </select>
+
+    <select id="getAllPayments" resultType="paymentResultMap">
+        SELECT * FROM Payment
+    </select>
+
+    <resultMap id="paymentResultMap" type="org.example.model.Payment" autoMapping="false">
+        <id property="paymentId" column="payment_id" />
+        <result property="accountId" column="account_id" />
+        <result property="amount" column="amount" />
+        <result property="currencyId" column="currency_id" />
+        <result property="paymentDate" column="payment_date" />
+    </resultMap>
+
+    <!-- Add more SQL statements as per your requirements -->
+
+</mapper>
