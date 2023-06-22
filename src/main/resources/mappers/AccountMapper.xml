@@ -9,7 +9,10 @@
     </select>
 
     <select id="getAccountById" resultMap="accountResultMap">
-        SELECT * FROM Account WHERE account_id = #{id}
+        SELECT account.account_id, user.user_id, account.account_type, account.balance, account.date_created
+        FROM account
+        JOIN user ON account.user_id = user.user_id
+        WHERE account_id = #{id}
     </select>
 
     <delete id="deleteAccountById">
@@ -29,9 +32,9 @@
 
     <resultMap id="accountResultMap" type="org.example.model.Account" autoMapping="false">
         <id property="accountId" column="account_id" />
-        <result property="userId" column="user_id" />
         <result property="accountType" column="account_type" />
         <result property="balance" column="balance" />
         <result property="dateCreated" column="date_created" />
+        <association property="user" column="user_id" resultMap="org.example.mapper.UserMapper.userResultMap" />
     </resultMap>
 </mapper>

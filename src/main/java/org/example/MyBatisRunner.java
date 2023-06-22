@@ -60,7 +60,7 @@ public class MyBatisRunner {
         Account account = accountService.getAccountById(1);
 
         // Test the getAllAccounts method
-        List<Account> accounts = accountService.getAllAccounts();
+//        List<Account> accounts = accountService.getAllAccounts();
 
         // Test the deleteAccountById method
 //        accountService.deleteAccountById(5);
@@ -70,9 +70,9 @@ public class MyBatisRunner {
 //        accountService.insertAccount(newAccount);
 
         // Test the updateAccount method
-        Account existingAccount = accountService.getAccountById(1);
-        existingAccount.setBalance(BigDecimal.valueOf(10.10));
-        accountService.updateAccount(existingAccount);
+//        Account existingAccount = accountService.getAccountById(1);
+//        existingAccount.setBalance(BigDecimal.valueOf(10.10));
+//        accountService.updateAccount(existingAccount);
 
 
 //end region

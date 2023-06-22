@@ -19,9 +19,11 @@ public class Account {
     @Id(name = "account_id")
     @Column(name = "account_id")
     private int accountId;
-    @XmlElement(name = "user_id")
-    @Column(name = "user_id")
-    private int userId;
+//    @XmlElement(name = "user_id")
+//    @Column(name = "user_id")
+//    private int userId;
+
+    private User user;
     @XmlElement(name = "account_type")
     @Column(name = "account_type")
     private String accountType;
@@ -40,15 +42,16 @@ public class Account {
     }
 
     // Constructor w/o accountId
-    public Account(int userId, String accountType, BigDecimal balance, LocalDateTime dateCreated) {
-        this.userId = userId;
+    public Account(User user, String accountType, BigDecimal balance, LocalDateTime dateCreated) {
+        this.user = user;
         this.accountType = accountType;
         this.balance = balance;
         this.dateCreated = LocalDateTime.now();
     }
-    public Account(int accountId, int userId, String accountType, BigDecimal balance, LocalDateTime dateCreated) {
+    public Account(int accountId, User user, String accountType, BigDecimal balance, LocalDateTime dateCreated) {
         this.accountId = accountId;
-        this.userId = userId;
+//        this.userId = userId;
+        this.user = user;
         this.accountType = accountType;
         this.balance = balance;
         this.dateCreated = dateCreated;
@@ -62,13 +65,13 @@ public class Account {
         this.accountId = accountId;
     }
 
-    public int getUserId() {
-        return userId;
-    }
+//    public int getUserId() {
+//        return userId;
+//    }
 
-    public void setUserId(int userId) {
-        this.userId = userId;
-    }
+//    public void setUserId(int userId) {
+//        this.userId = userId;
+//    }
 
     public String getAccountType() {
         return accountType;
@@ -94,19 +97,19 @@ public class Account {
         this.dateCreated = dateCreated;
     }
 
-//    public User getUser() {
-//        return user;
-//    }
-//
-//    public void setUser(User user) {
-//        this.user = user;
-//    }
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
 
     @Override
     public String toString() {
         return "Account{" +
                 "accountId=" + accountId +
-                ", userId=" + userId +
+                ", userId=" + (user != null ? user.getUserId() : null) +
                 ", accountType='" + accountType + '\'' +
                 ", balance=" + balance +
                 ", dateCreated=" + dateCreated +
