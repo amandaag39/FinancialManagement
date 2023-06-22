@@ -3,18 +3,23 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.AccountMapper">
+
+    <select id="getAllAccounts" resultMap="accountResultMap">
+        SELECT * FROM Account
+    </select>
+
     <select id="getAccountById" resultMap="accountResultMap">
         SELECT * FROM Account WHERE account_id = #{id}
     </select>
 
+    <delete id="deleteAccountById">
+        DELETE FROM Account WHERE account_id = #{id}
+    </delete>
+
     <insert id="insertAccount" parameterType="org.example.model.Account">
-        INSERT INTO Account (account_id, user_id, account_type, balance, date_created)
+        INSERT INTO Account(account_id, user_id, account_type, balance, date_created)
         VALUES (#{accountId}, #{userId}, #{accountType}, #{balance}, #{dateCreated})
     </insert>
-
-    <select id="selectLastInsertedId" resultType="java.lang.Integer">
-        SELECT LAST_INSERT_ID()
-    </select>
 
     <update id="updateAccount" parameterType="org.example.model.Account">
         UPDATE Account
@@ -22,27 +27,11 @@
         WHERE account_id = #{accountId}
     </update>
 
-    <delete id="deleteAccountById">
-        DELETE FROM Account WHERE account_id = #{id}
-    </delete>
-
-    <select id="getAllAccounts" resultMap="accountResultMap">
-        SELECT * FROM Account
-    </select>
-
     <resultMap id="accountResultMap" type="org.example.model.Account" autoMapping="false">
         <id property="accountId" column="account_id" />
         <result property="userId" column="user_id" />
         <result property="accountType" column="account_type" />
         <result property="balance" column="balance" />
         <result property="dateCreated" column="date_created" />
-
-        <association property="user" resultMap="userResultMap" />
-    </resultMap>
-
-    <resultMap id="userResultMap" type="org.example.model.User">
-        <id property="userId" column="user_id" />
-        <result property="name" column="user_name" />
-        <!-- Add other mappings for the User class properties -->
     </resultMap>
 </mapper>

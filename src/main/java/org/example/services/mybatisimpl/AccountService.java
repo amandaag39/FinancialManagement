@@ -19,9 +19,10 @@ public class AccountService implements AccountMapper {
     public Account getAccountById(int accountId) {
         try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
              SqlSession session = new SqlSessionFactoryBuilder().build(stream).openSession()) {
-
             AccountMapper accountMapper = session.getMapper(AccountMapper.class);
-            return accountMapper.getAccountById(accountId);
+            Account account = accountMapper.getAccountById(accountId);
+            LOGGER.info("Account by ID: {}", account);
+            return account;
 
         } catch (IOException e) {
             LOGGER.error("Error getting account by ID: " + accountId, e);
@@ -32,9 +33,10 @@ public class AccountService implements AccountMapper {
     public List<Account> getAllAccounts() {
         try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
              SqlSession session = new SqlSessionFactoryBuilder().build(stream).openSession()) {
-
             AccountMapper accountMapper = session.getMapper(AccountMapper.class);
-            return accountMapper.getAllAccounts();
+            List<Account> accounts = accountMapper.getAllAccounts();
+            LOGGER.info("All Accounts: {}", accounts);
+            return accounts;
 
         } catch (IOException e) {
             LOGGER.error("Error getting all accounts", e);

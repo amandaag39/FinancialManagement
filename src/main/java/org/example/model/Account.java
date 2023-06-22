@@ -28,19 +28,19 @@ public class Account {
     @XmlElement
     private BigDecimal balance;
 
-    private User user; // Added Foreign key object
-
     @XmlElement(name = "date_created")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
     @Column(name = "date_created")
     private LocalDateTime dateCreated;
+
+//    private User user; // Added Foreign key object
 
     public Account() {
         this.dateCreated = LocalDateTime.now();
     }
 
     // Constructor w/o accountId
-    public Account(int userId, String accountType, BigDecimal balance) {
+    public Account(int userId, String accountType, BigDecimal balance, LocalDateTime dateCreated) {
         this.userId = userId;
         this.accountType = accountType;
         this.balance = balance;
@@ -94,13 +94,13 @@ public class Account {
         this.dateCreated = dateCreated;
     }
 
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
+//    public User getUser() {
+//        return user;
+//    }
+//
+//    public void setUser(User user) {
+//        this.user = user;
+//    }
 
     @Override
     public String toString() {

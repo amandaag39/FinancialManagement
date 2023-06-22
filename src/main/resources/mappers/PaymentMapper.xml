@@ -4,10 +4,13 @@
         "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.mapper.PaymentMapper">
 
-    <insert id="insertPayment" parameterType="org.example.model.Payment">
-        INSERT INTO Payment (account_id, amount, currency_id, payment_date)
-        VALUES (#{accountId}, #{amount}, #{currencyId}, #{paymentDate})
-    </insert>
+    <select id="getAllPayments" resultMap="paymentResultMap">
+        SELECT * FROM Payment
+    </select>
+
+    <select id="getPaymentById" resultMap="paymentResultMap">
+        SELECT * FROM Payment WHERE payment_id = #{id}
+    </select>
 
     <update id="updatePayment" parameterType="org.example.model.Payment">
         UPDATE Payment
@@ -15,20 +18,14 @@
         WHERE payment_id = #{paymentId}
     </update>
 
-    <delete id="deletePayment" parameterType="int">
-        DELETE FROM Payment
-        WHERE payment_id = #{paymentId}
+    <delete id="deletePayment">
+        DELETE FROM Payment WHERE payment_id = #{id}
     </delete>
 
-    <select id="getPaymentById" parameterType="int" resultType="org.example.model.Payment">
-        SELECT payment_id, account_id, amount, currency_id, payment_date
-        FROM Payment
-        WHERE payment_id = #{paymentId}
-    </select>
-
-    <select id="getAllPayments" resultType="paymentResultMap">
-        SELECT * FROM Payment
-    </select>
+    <insert id="insertPayment" parameterType="org.example.model.Payment">
+        INSERT INTO Payment (payment_id, account_id, amount, currency_id, payment_date)
+        VALUES (#{paymentId}, #{accountId}, #{amount}, #{currencyId}, #{paymentDate})
+    </insert>
 
     <resultMap id="paymentResultMap" type="org.example.model.Payment" autoMapping="false">
         <id property="paymentId" column="payment_id" />
@@ -37,7 +34,5 @@
         <result property="currencyId" column="currency_id" />
         <result property="paymentDate" column="payment_date" />
     </resultMap>
-
-    <!-- Add more SQL statements as per your requirements -->
 
 </mapper>

@@ -55,45 +55,48 @@ public class MyBatisRunner {
 
 
 //region AccountService
-//        AccountService accountService = new AccountService();
-//
-//        // Get an account by ID
-//        Account account = accountService.getAccountById(1);
-//        LOGGER.info("Account by ID: " + account);
-//
-//        // Get all accounts
-//        List<Account> accounts = accountService.getAllAccounts();
-//        LOGGER.info("All Accounts: " + accounts);
-//
-//        // Delete an account
-//        int accountIdToDelete = 10;
-//        accountService.deleteAccountById(accountIdToDelete);
-//        LOGGER.info("Account with ID " + accountIdToDelete + " deleted successfully!");
-//
-//        // Insert a new account
-//        Account newAccount = new Account(
-//                20,
-//                11,
-//                "Savings",
-//                BigDecimal.valueOf(1000.0),
-//                LocalDateTime.now()
-//        );
+        // Test the getAccountById method
+        AccountService accountService = new AccountService();
+        Account account = accountService.getAccountById(1);
+
+        // Test the getAllAccounts method
+        List<Account> accounts = accountService.getAllAccounts();
+
+        // Test the deleteAccountById method
+//        accountService.deleteAccountById(5);
+
+        // Test the insertAccount method
+//        Account newAccount = new Account(6,6, "Business", BigDecimal.valueOf(20.00), LocalDateTime.of(2023, 6, 5, 12, 31, 32));
 //        accountService.insertAccount(newAccount);
-//        LOGGER.info("Account inserted successfully!");
-//
-//        // Update an account
-//        Account existingAccount = accountService.getAccountById(2);
-//        existingAccount.setAccountType("Checking");
-//        existingAccount.setBalance(BigDecimal.valueOf(2000.0));
-//        accountService.updateAccount(existingAccount);
-//        LOGGER.info("Account updated successfully: " + existingAccount);
+
+        // Test the updateAccount method
+        Account existingAccount = accountService.getAccountById(1);
+        existingAccount.setBalance(BigDecimal.valueOf(10.10));
+        accountService.updateAccount(existingAccount);
+
+
 //end region
 
 
 //region PaymentService
-        // Test the PaymentService methods
-        PaymentService paymentService = new PaymentService();
-        List<Payment> payments = paymentService.getAllPayments();
+//        // Test the getAllPayments method
+//        PaymentService paymentService = new PaymentService();
+//        List<Payment> payments = paymentService.getAllPayments();
+//
+//        // Test the getPaymentById method
+//        Payment payment = paymentService.getPaymentById(8);
+//
+//        // Test the updatePayment method
+//        Payment existingPayment = paymentService.getPaymentById(1);
+//        existingPayment.setAmount(BigDecimal.valueOf(200.10));
+//        paymentService.updatePayment(existingPayment);
+//
+//        // Test the deletePayment method
+//        paymentService.deletePayment(8);
+//
+//        // Test the insertPayment method
+//        Payment newPayment = new Payment(8,4,BigDecimal.valueOf(1000.0),1, LocalDateTime.of(2023, 6, 5, 12, 31, 32));
+//        paymentService.insertPayment(newPayment);
 
     }
 }

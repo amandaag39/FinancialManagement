@@ -29,6 +29,12 @@ public class Payment {
         this.paymentDate = paymentDate;
     }
 
+    public Payment(int accountId, BigDecimal amount, int currencyId, LocalDateTime paymentDate) {
+        this.accountId = accountId;
+        this.amount = amount;
+        this.currencyId = currencyId;
+        this.paymentDate = paymentDate;
+    }
     public int getPaymentId() {
         return paymentId;
     }
