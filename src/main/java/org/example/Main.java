@@ -142,21 +142,21 @@ public class Main {
 
         // Homework 14 - revision: add ConnectionPool
 
-//        // Create a connection pool with desired configurations
-//        ConnectionPool connectionPool = new ConnectionPool();
-//
-//        // Create an instance of your DAO using the connection pool
-//        GenericDAO<User> userDao = new GenericDAOImpl<>(connectionPool, User.class);
+        // Create a connection pool with desired configurations
+        ConnectionPool connectionPool = new ConnectionPool();
+
+        // Create an instance of your DAO using the connection pool
+        GenericDAO<User> userDao = new GenericDAOImpl<>(connectionPool, User.class);
 
 
-//        // 1. Test the getById method
-//        int entityId = 3; // Replace with the ID of the entity you want to retrieve
-//        User retrievedEntity = dao.getById(entityId);
-//        if (retrievedEntity != null) {
-//            System.out.println("Retrieved entity: " + retrievedEntity);
-//        } else {
-//            System.out.println("Entity with ID " + entityId + " not found.");
-//        }
+        // 1. Test the getById method
+        int entityId = 3; // Replace with the ID of the entity you want to retrieve
+        User retrievedEntity = userDao.getById(entityId);
+        if (retrievedEntity != null) {
+            System.out.println("Retrieved entity: " + retrievedEntity);
+        } else {
+            System.out.println("Entity with ID " + entityId + " not found.");
+        }
 
 
 //        // 2. Test the create method
@@ -267,65 +267,65 @@ public class Main {
 
 
 
-        // Homework 16 - JAXB
-
-        // Parse users.xml
-        try {
-            // 1. Create an instance of the JAXBContext for root class
-            JAXBContext jaxbContext = JAXBContext.newInstance(Users.class); // Pass the class you want to unmarshal
-
-            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
-            Unmarshaller usersUnmarshaller = jaxbContext.createUnmarshaller();
-
-            // 3. Use the 'Unmarshaller' to unmarshal the XML data
-            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml");
-            Users unmarshalledUsers = (Users) usersUnmarshaller.unmarshal(xmlFile);
-
-            // 4. Access the parsed data
-            List<User> userList = unmarshalledUsers.getUserList();
-            System.out.println(userList);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        // parse accounts.xml
-
-        try {
-            // 1. Create an instance of the JAXBContext for root class
-            JAXBContext jaxbContext = JAXBContext.newInstance(Accounts.class); // Pass the class you want to unmarshal
-
-            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
-            Unmarshaller accountsUnmarshaller = jaxbContext.createUnmarshaller();
-
-            // 3. Use the 'Unmarshaller' to unmarshal the XML data
-            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Accounts.xml");
-            Accounts unmarshalledAccounts = (Accounts) accountsUnmarshaller.unmarshal(xmlFile);
-
-            // 4. Access the parsed data
-            List<Account> accountList = unmarshalledAccounts.getAccountList();
-            System.out.println(accountList);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
-
-        //parse stocks.xml
-
-        try {
-            // 1. Create an instance of the JAXBContext for root class
-            JAXBContext jaxbContext = JAXBContext.newInstance(Stocks.class); // Pass the class you want to unmarshal
-
-            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
-            Unmarshaller stocksUnmarshaller = jaxbContext.createUnmarshaller();
-
-            // 3. Use the 'Unmarshaller' to unmarshal the XML data
-            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml");
-            Stocks unmarshalledStocks = (Stocks) stocksUnmarshaller.unmarshal(xmlFile);
-
-            // 4. Access the parsed data
-            List<Stock> stockList = unmarshalledStocks.getStockList();
-            System.out.println(stockList);
-        } catch (JAXBException e) {
-            e.printStackTrace();
-        }
+//        // Homework 16 - JAXB
+//
+//        // Parse users.xml
+//        try {
+//            // 1. Create an instance of the JAXBContext for root class
+//            JAXBContext jaxbContext = JAXBContext.newInstance(Users.class); // Pass the class you want to unmarshal
+//
+//            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
+//            Unmarshaller usersUnmarshaller = jaxbContext.createUnmarshaller();
+//
+//            // 3. Use the 'Unmarshaller' to unmarshal the XML data
+//            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Users.xml");
+//            Users unmarshalledUsers = (Users) usersUnmarshaller.unmarshal(xmlFile);
+//
+//            // 4. Access the parsed data
+//            List<User> userList = unmarshalledUsers.getUserList();
+//            System.out.println(userList);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
+//
+//        // parse accounts.xml
+//
+//        try {
+//            // 1. Create an instance of the JAXBContext for root class
+//            JAXBContext jaxbContext = JAXBContext.newInstance(Accounts.class); // Pass the class you want to unmarshal
+//
+//            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
+//            Unmarshaller accountsUnmarshaller = jaxbContext.createUnmarshaller();
+//
+//            // 3. Use the 'Unmarshaller' to unmarshal the XML data
+//            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Accounts.xml");
+//            Accounts unmarshalledAccounts = (Accounts) accountsUnmarshaller.unmarshal(xmlFile);
+//
+//            // 4. Access the parsed data
+//            List<Account> accountList = unmarshalledAccounts.getAccountList();
+//            System.out.println(accountList);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
+//
+//        //parse stocks.xml
+//
+//        try {
+//            // 1. Create an instance of the JAXBContext for root class
+//            JAXBContext jaxbContext = JAXBContext.newInstance(Stocks.class); // Pass the class you want to unmarshal
+//
+//            // 2. Create an instance of 'Unmarshaller' from the JAXBContext object
+//            Unmarshaller stocksUnmarshaller = jaxbContext.createUnmarshaller();
+//
+//            // 3. Use the 'Unmarshaller' to unmarshal the XML data
+//            File xmlFile = new File("C:\\Users\\Owner\\OneDrive\\Documents\\GitHub\\FinancialManagement\\src\\main\\resources\\XML Files\\Stocks.xml");
+//            Stocks unmarshalledStocks = (Stocks) stocksUnmarshaller.unmarshal(xmlFile);
+//
+//            // 4. Access the parsed data
+//            List<Stock> stockList = unmarshalledStocks.getStockList();
+//            System.out.println(stockList);
+//        } catch (JAXBException e) {
+//            e.printStackTrace();
+//        }
     }
 }

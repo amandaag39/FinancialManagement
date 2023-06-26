@@ -1,6 +1,8 @@
 package org.example.model;
 
 
+import org.example.annotations.Column;
+import org.example.annotations.Id;
 import org.example.utilities.LocalDateAdapter;
 import org.example.utilities.LocalDateTimeAdapter;
 
@@ -15,6 +17,8 @@ import java.io.Serializable;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class User implements Serializable {
     @XmlElement(name = "user_id")
+    @Id(name = "user_id")
+    @Column(name = "user_id")
     private int userId;
     @XmlElement
     private String username;
@@ -23,17 +27,22 @@ public class User implements Serializable {
     @XmlElement
     private String password;
     @XmlElement(name= "first_name")
+    @Column(name = "first_name")
     private String firstName;
     @XmlElement(name="last_name")
+    @Column(name = "last_name")
     private String lastName;
     @XmlElement(name="date_of_birth")
     @XmlJavaTypeAdapter(LocalDateAdapter.class)
+    @Column(name = "date_of_birth")
     private LocalDate dateOfBirth;
     @XmlElement(name="registration_date")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @Column(name = "registration_date")
     private LocalDateTime registrationDate;
     @XmlElement(name="last_login")
     @XmlJavaTypeAdapter(LocalDateTimeAdapter.class)
+    @Column(name = "last_login")
     private LocalDateTime lastLogin;
 
     //Constructor

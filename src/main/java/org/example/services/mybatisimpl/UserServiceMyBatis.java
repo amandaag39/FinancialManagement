@@ -8,19 +8,20 @@ import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.mapper.UserMapper;
 import org.example.model.User;
+import org.example.services.factoryservice.IUserService;
 
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
-public class UserService implements UserMapper {
+public class UserServiceMyBatis implements UserMapper, IUserService {
 
-    private static final Logger LOGGER = LogManager.getLogger(UserService.class);
-    public User selectUserById(int id) {
+    private static final Logger LOGGER = LogManager.getLogger(UserServiceMyBatis.class);
+    public User getUserById(int id) {
         try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml");
              SqlSession session = new SqlSessionFactoryBuilder().build(stream).openSession()) {
             UserMapper userMapper = session.getMapper(UserMapper.class);
-            User user = userMapper.selectUserById(id);
+            User user = userMapper.getUserById(id);
             LOGGER.info("User by ID: {}", user);
             return user;
 
@@ -44,12 +45,12 @@ public class UserService implements UserMapper {
         return null;
     }
 
-    public void insertUser(User user) {
+    public void createUser(User user) {
         try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml")) {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(stream);
             try (SqlSession session = sqlSessionFactory.openSession()) {
                 UserMapper userMapper = session.getMapper(UserMapper.class);
-                userMapper.insertUser(user);
+                userMapper.createUser(user);
                 session.commit();
                 LOGGER.info("User inserted successfully!");
             }
@@ -71,12 +72,12 @@ public class UserService implements UserMapper {
         }
     }
 
-    public void deleteUserById(int id) {
+    public void deleteUser(int id) {
         try (InputStream stream = Resources.getResourceAsStream("mybatis-config.xml")) {
             SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(stream);
             try (SqlSession session = sqlSessionFactory.openSession()) {
                 UserMapper userMapper = session.getMapper(UserMapper.class);
-                userMapper.deleteUserById(id);
+                userMapper.deleteUser(id);
                 session.commit();
                 LOGGER.info("User with ID " + id + " deleted successfully!");
             }

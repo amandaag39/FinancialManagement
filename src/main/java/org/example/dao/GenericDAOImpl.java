@@ -24,6 +24,10 @@ public class GenericDAOImpl<T> implements GenericDAO<T> {
         this.tableName = entityClass.getSimpleName().toLowerCase();
         }
 
+//    public GenericDAOImpl(Class<T> entityClass) {
+//        // Initialize any required fields or resources here
+//    }
+
 
     @Override
     public void create(T entity) {

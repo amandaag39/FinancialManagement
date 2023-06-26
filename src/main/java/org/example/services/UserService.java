@@ -2,10 +2,11 @@ package org.example.services;
 
 import org.example.dao.GenericDAOImpl;
 import org.example.model.User;
+import org.example.services.factoryservice.IUserService;
 
 import java.util.List;
 
-public class UserService  {
+public class UserService implements IUserService {
     private GenericDAOImpl<User> userDAO;
 
     public UserService(GenericDAOImpl<User> userDAO) {

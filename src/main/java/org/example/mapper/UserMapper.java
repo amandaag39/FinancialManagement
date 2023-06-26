@@ -6,13 +6,13 @@ import org.example.model.User;
 import java.util.List;
 
 public interface UserMapper {
-    User selectUserById(int id);
+    User getUserById(int id);
 
-    void insertUser(User user);
+    void createUser(User user);
 
     void updateUser(User user);
 
-    void deleteUserById(int id);
+    void deleteUser(int id);
 
     List<User> getAllUsers();
 

@@ -3,27 +3,20 @@ package org.example;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.example.model.Account;
-import org.example.model.Payment;
 import org.example.model.User;
 import org.example.services.mybatisimpl.AccountService;
-import org.example.services.mybatisimpl.PaymentService;
-import org.example.services.mybatisimpl.UserService;
-
-import java.math.BigDecimal;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.List;
+import org.example.services.mybatisimpl.UserServiceMyBatis;
 
 public class MyBatisRunner {
 
     private static final Logger LOGGER = LogManager.getLogger(MyBatisRunner.class);
     public static void main(String[] args) {
 
-//region UserService
-//        UserService userService = new UserService();
+//region UserServiceMyBatis
+        UserServiceMyBatis userService = new UserServiceMyBatis();
 //
 //        // Get a user by ID
-//        User user = userService.selectUserById(1);
+        User user = userService.getUserById(1);
 //
 //        // Get all users
 //        List<User> users = userService.getAllUsers();
@@ -56,8 +49,8 @@ public class MyBatisRunner {
 
 //region AccountService
         // Test the getAccountById method
-        AccountService accountService = new AccountService();
-        Account account = accountService.getAccountById(1);
+//        AccountService accountService = new AccountService();
+//        Account account = accountService.getAccountById(1);
 
         // Test the getAllAccounts method
 //        List<Account> accounts = accountService.getAllAccounts();

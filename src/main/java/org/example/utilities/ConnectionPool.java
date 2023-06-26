@@ -60,8 +60,8 @@ public class ConnectionPool {
         try {
             return DriverManager.getConnection(
                     props.getProperty("db.url"),
-                    props.getProperty("db.user"),
-                    props.getProperty("db.pass")
+                    props.getProperty("db.username"),
+                    props.getProperty("db.password")
             );
         } catch (SQLException e) {
             LOGGER.error("Error getting the connection:", e);
