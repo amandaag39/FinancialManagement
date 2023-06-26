@@ -1,4 +1,4 @@
-package org.example.utilities;
+package org.example;
 
 import org.example.factory.ServiceFactory;
 import org.example.model.User;
